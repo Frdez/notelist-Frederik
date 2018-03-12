@@ -67,6 +67,11 @@ function buildList()
   }
 }
 
+function submitEditEvent(event)
+{
+  
+}
+
 function submitDelEvent(event)
 {
   var arrIndex = event.target.getAttribute("data-index");
