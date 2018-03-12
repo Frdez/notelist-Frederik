@@ -1,4 +1,4 @@
-console.log("god mand");
+var modal = document.querySelector(".modal-bg");
 
 function setLocal(localNotes)
 {
@@ -19,14 +19,14 @@ function getLocal()
   }
 }
 
-function submitNote()
+function submitNote(text, time, important)
 {
   var origNotes = getLocal();
 
   var newNote = {
-    text:     "God mand",
-    dueDate:  "2018-03-09 13:00:00",
-    important: true
+    text:     text,
+    dueDate:  time,
+    important: important
   };
 
   origNotes.push(newNote);
@@ -39,20 +39,64 @@ function buildList()
   var noteList = getLocal();
   var ulElm = document.querySelector("ul");
 
+  ulElm.innerHTML = "";
+
   for(var i = 0; i < noteList.length; i++)
   {
     var liElm = document.createElement("li");
     var pElm = document.createElement("p");
+    var delBtnElm = document.createElement("button");
 
-    pElm.innerHTML = "god mand";
+    pElm.innerHTML = noteList[i].text;
+
+    delBtnElm.innerHTML = "Delete";
+    delBtnElm.setAttribute("data-index", i);
+
+    delBtnElm.addEventListener("click", submitDelEvent);
 
     liElm.appendChild(pElm);
+    liElm.appendChild(delBtnElm);
 
     ulElm.appendChild(liElm);
   }
+}
+
+function submitDelEvent(event)
+{
+  var arrIndex = event.target.getAttribute("data-index");
+  var notes = getLocal();
+
+  notes.splice(arrIndex, 1);
+
+  setLocal(notes);
+  buildList();
+}
+
+function submitNoteEvent(event)
+{
+  console.log("hej");
+
+  var noteText = document.querySelector("#noteText")
+  var noteTime = document.querySelector("#noteTime")
+  var noteImportant = document.querySelector("#noteImportant")
+
+  submitNote(noteText.value, noteTime.value, noteImportant.checked);
+  buildList();
+  modal.style.display = "none";
 }
 
 window.onload = function()
 {
   buildList();
 }
+
+var showModalBtn = document.querySelector("#showModal");
+
+showModalBtn.addEventListener("click", function(event)
+{
+  modal.style.display = "block";
+});
+
+var submitNoteBtn = document.querySelector("#addNote")
+
+submitNoteBtn.addEventListener("click", submitNoteEvent)
