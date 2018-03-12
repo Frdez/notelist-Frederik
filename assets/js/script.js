@@ -48,7 +48,7 @@ function buildList()
     var delBtnElm = document.createElement("button");
     var editBtnElm = document.createElement("button");
 
-    editBtnElm.innerHTML = "Button";
+    editBtnElm.innerHTML = "Edit";
     editBtnElm.setAttribute("data-index", 1);
 
     pElm.innerHTML = noteList[i].text;
