@@ -49,6 +49,7 @@ function buildList()
     var editBtnElm = document.createElement("button");
 
     editBtnElm.innerHTML = "Button";
+    editBtnElm.setAttribute("data-index", 1);
 
     pElm.innerHTML = noteList[i].text;
 
@@ -59,6 +60,7 @@ function buildList()
 
     liElm.appendChild(pElm);
     liElm.appendChild(delBtnElm);
+    liElm.appendChild(editBtnElm);
 
     ulElm.appendChild(liElm);
   }
