@@ -51,6 +51,7 @@ function buildList()
     editBtnElm.innerHTML = "Edit";
     editBtnElm.setAttribute("data-index", i);
     editBtnElm.addEventListener("click", submitEditEvent);
+    editBtnElm.setAttribute("data-index", i);
 
     pElm.innerHTML = noteList[i].text;
 
@@ -69,7 +70,13 @@ function buildList()
 
 function submitEditEvent(event)
 {
-  
+  var notes = getLocal();
+  var arrIndex = event.target.getAttribute("data-index");
+
+  notes[arrIndex].text = "God mand";
+
+  setLocal(notes);
+  buildList();
 }
 
 function submitDelEvent(event)
