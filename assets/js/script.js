@@ -73,7 +73,7 @@ function submitEditEvent(event)
   var notes = getLocal();
   var arrIndex = event.target.getAttribute("data-index");
 
-  notes[arrIndex].text = "God mand";
+  notes[arrIndex].text = prompt("What do you wanna edit?");
 
   setLocal(notes);
   buildList();
