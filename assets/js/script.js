@@ -43,6 +43,10 @@ function buildList()
 
   for(var i = 0; i < noteList.length; i++)
   {
+    var now = new Date(noteList[i].dueDate);
+    var outDate = now.getDate() + '/' + (now.getMonth() + 1) + "-" + now.getFullYear();
+    var outTime = now.getHours() + ':' + now.getMinutes();
+
     var liElm = document.createElement("li");
     var pElm = document.createElement("p");
     var delBtnElm = document.createElement("button");
@@ -53,7 +57,7 @@ function buildList()
     editBtnElm.addEventListener("click", submitEditEvent);
     editBtnElm.setAttribute("data-index", i);
 
-    pElm.innerHTML = noteList[i].text;
+    pElm.innerHTML = noteList[i].text + " | " + outDate + " " + outTime;
 
     delBtnElm.innerHTML = "Delete";
     delBtnElm.setAttribute("data-index", i);
@@ -73,10 +77,11 @@ function submitEditEvent(event)
   var notes = getLocal();
   var arrIndex = event.target.getAttribute("data-index");
 
-  notes[arrIndex].text = prompt("What do you wanna edit?");
+  notes[arrIndex].text = prompt("Write your new note here:");
 
   setLocal(notes);
   buildList();
+
 }
 
 function submitDelEvent(event)
@@ -101,6 +106,7 @@ function submitNoteEvent(event)
   submitNote(noteText.value, noteTime.value, noteImportant.checked);
   buildList();
   modal.style.display = "none";
+
 }
 
 window.onload = function()
