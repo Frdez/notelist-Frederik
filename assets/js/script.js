@@ -34,6 +34,8 @@ function submitNote(text, time, important)
   setLocal(origNotes);
 }
 
+
+//Bygger selve listen (formatet)
 function buildList()
 {
   var noteList = getLocal();
@@ -72,6 +74,7 @@ function buildList()
   }
 }
 
+//editer
 function submitEditEvent(event)
 {
   var notes = getLocal();
@@ -84,6 +87,7 @@ function submitEditEvent(event)
 
 }
 
+//deleter
 function submitDelEvent(event)
 {
   var arrIndex = event.target.getAttribute("data-index");
@@ -95,6 +99,8 @@ function submitDelEvent(event)
   buildList();
 }
 
+//aktiverer at den laver listen på ny.
+//ny artikel, så laver den listen forfra
 function submitNoteEvent(event)
 {
   console.log("hej");
@@ -109,6 +115,7 @@ function submitNoteEvent(event)
 
 }
 
+//bliver først kørt, når den er færdig med at indlæse HTML, som så kalder buildlist()
 window.onload = function()
 {
   buildList();
